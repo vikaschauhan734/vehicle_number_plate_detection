@@ -1,3 +1,20 @@
+CREATE TEMPORARY TABLE NameList (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO NameList (name) VALUES 
+('Ravi Kumar'), ('Neha Sharma'), ('Suresh Patel'), ('Anita Singh'), ('Vikram Gupta'),
+('Amitabh Bachchan'), ('Shahrukh Khan'), ('Aishwarya Rai'), ('Sachin Tendulkar'), 
+('Priyanka Chopra'), ('Virat Kohli'), ('Deepika Padukone'), ('Ranbir Kapoor'), 
+('Alia Bhatt'), ('MS Dhoni'), ('Anushka Sharma'), ('Salman Khan'), ('Kareena Kapoor'),
+('Hrithik Roshan'), ('Kangana Ranaut'), ('Rajinikanth'), ('Nayanthara'), ('Pawan Kalyan'),
+('Mahesh Babu'), ('Kajal Aggarwal'), ('Vijay'), ('Samantha Akkineni'), ('Dulquer Salmaan'),
+('Mammootty'), ('Mohanlal'), ('Parvathy Thiruvothu'), ('Nivin Pauly'), ('Fahadh Faasil'),
+('Prithviraj Sukumaran'), ('Manju Warrier'), ('Vikram'), ('Suriya'), ('Jyothika'), 
+('Ajith Kumar'), ('Pooja Hegde'), ('Rashmika Mandanna'), ('Yash'), ('Ram Charan'), 
+('Allu Arjun'), ('Rana Daggubati'), ('Nani'), ('Rakul Preet Singh');
+
 DELIMITER $$
 
 CREATE PROCEDURE InsertFlats()
@@ -8,34 +25,25 @@ BEGIN
     DECLARE tower_prefix CHAR(1);
     DECLARE floor_number INT;
     DECLARE owner_name VARCHAR(100);
-    
-    -- Array of Indian names
-    DECLARE name_list TEXT[] DEFAULT ARRAY['Ravi Kumar', 'Neha Sharma', 'Suresh Patel', 'Anita Singh', 'Vikram Gupta',
-                                           'Amitabh Bachchan', 'Shahrukh Khan', 'Aishwarya Rai', 'Sachin Tendulkar', 
-                                           'Priyanka Chopra', 'Virat Kohli', 'Deepika Padukone', 'Ranbir Kapoor', 
-                                           'Alia Bhatt', 'MS Dhoni', 'Anushka Sharma', 'Salman Khan', 'Kareena Kapoor',
-                                           'Hrithik Roshan', 'Kangana Ranaut', 'Rajinikanth', 'Nayanthara', 'Pawan Kalyan',
-                                           'Mahesh Babu', 'Kajal Aggarwal', 'Vijay', 'Samantha Akkineni', 'Dulquer Salmaan',
-                                           'Mammootty', 'Mohanlal', 'Parvathy Thiruvothu', 'Nivin Pauly', 'Fahadh Faasil',
-                                           'Prithviraj Sukumaran', 'Manju Warrier', 'Vikram', 'Suriya', 'Jyothika', 'Ajith Kumar',
-                                           'Nayanthara', 'Samantha Akkineni', 'Pooja Hegde', 'Rashmika Mandanna', 'Yash', 
-                                           'Ram Charan', 'Allu Arjun', 'Rana Daggubati', 'Nani', 'Rakul Preet Singh'];
-                                           
-    -- Total number of names in the list
-    DECLARE name_count INT DEFAULT ARRAY_LENGTH(name_list, 1);
-    
-    WHILE floor_id <= 300 DO
+    DECLARE name_count INT;
+    DECLARE random_index INT;
+
+    -- Get the count of names
+    SELECT COUNT(*) INTO name_count FROM NameList;
+
+    WHILE floor_id <= 50 DO  -- Limit to 50 floors for 300 entries
         SET tower_prefix = CASE 
-            WHEN floor_id <= 100 THEN 'A'
-            WHEN floor_id <= 200 THEN 'B'
+            WHEN floor_id <= 16 THEN 'A'
+            WHEN floor_id <= 32 THEN 'B'
             ELSE 'C'
         END;
         
-        SET floor_number = CEIL(floor_id / 12);
+        SET floor_number = FLOOR((floor_id - 1) / 6) + 1;
         
         WHILE flat_counter <= 6 DO
-            -- Randomly select an owner name from the list
-            SET owner_name = name_list[FLOOR(1 + (RAND() * name_count))];
+            -- Randomly select an owner name from the table
+            SET random_index = FLOOR(1 + (RAND() * name_count));
+            SELECT name INTO owner_name FROM NameList WHERE id = random_index;
             
             INSERT INTO Flats (flat_number, floor_id, flat_name, owner_name)
             VALUES (flat_id, floor_id, 
