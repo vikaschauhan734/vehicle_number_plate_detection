@@ -1,5 +1,7 @@
 CREATE SCHEMA `vehicle_number_plate` ;
 
+USE `vehicle_number_plate`;
+
 CREATE TABLE Towers (
 tower_id INT PRIMARY KEY,
 tower_name VARCHAR(10) NOT NULL
