@@ -28,7 +28,7 @@ flat_number INT,
 name VARCHAR(100) NOT NULL,
 phone_number VARCHAR(15),
 email VARCHAR(50),
-resident_type ENUM('Owner', 'Tenant') NOT NULL,
+resident_type VARCHAR(20) NOT NULL,
 FOREIGN KEY (flat_number) REFERENCES Flats(flat_number)
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE Vehicles (
 vehicle_id INT PRIMARY KEY,
 flat_number INT,
 vehicle_number VARCHAR(20) NOT NULL,
-vehicle_type ENUM('Owner', 'Tenant', 'Guest') NOT NULL,
+vehicle_type VARCHAR(20) NOT NULL,
 FOREIGN KEY (flat_number) REFERENCES Flats(flat_number)
 );
 

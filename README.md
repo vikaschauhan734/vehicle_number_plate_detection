@@ -24,7 +24,7 @@ Database Schema:
 
 5. **Residents**:
 * `resident_id` (Primary Key)
-* `flat_name` (Foreign Key referencing Flats)
+* `flat_number` (Foreign Key referencing Flats)
 * `name`
 * `phone_number`
 * `email`
