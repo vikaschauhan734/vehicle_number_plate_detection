@@ -3,3 +3,5 @@ pandas
 sqlalchemy
 google-cloud-bigquery
 db-types
+xmltodict
+dvc[gdrive]
