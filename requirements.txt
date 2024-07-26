@@ -1,7 +1,5 @@
 numpy
 pandas
 sqlalchemy
-google-auth 
-google-auth-oauthlib 
-google-auth-httplib2 
 google-cloud-bigquery
+db-types
