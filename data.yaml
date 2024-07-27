@@ -1,0 +1,6 @@
+train: /content/drive/MyDrive/vehicle_number_plate/dataset/train/images
+val: /content/drive/MyDrive/vehicle_number_plate/dataset/val/images
+test: /content/drive/MyDrive/vehicle_number_plate/dataset/test/images
+
+nc: 1
+names: ['number_plate']
