@@ -5,3 +5,4 @@ google-cloud-bigquery
 db-types
 xmltodict
 dvc[gdrive]
+easyocr
