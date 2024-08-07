@@ -6,3 +6,4 @@ db-types
 xmltodict
 dvc[gdrive]
 easyocr
+flask
