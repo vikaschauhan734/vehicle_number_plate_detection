@@ -85,7 +85,7 @@ def vehicle_add(vehicle_data, predict, time):
         insert_into_vehicle_entry(number_plate,time,vehicle_data)
     else:
         insert_into_vehicle_entry(number_plate,time,vehicle_data)
-
+    return number_plate, time
 vehicle_data_df = vehicle_data()
 
 model = YOLOv10("/content/drive/MyDrive/vnp/yolov10/best.pt")
